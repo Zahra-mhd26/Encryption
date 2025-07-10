@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	
+  <PropertyGroup>
+	  <TargetFramework>net48</TargetFramework>
+	  <Version>1.0</Version>
+    <Title>ExcelEncryption</Title>
+    <Description>Description of ExcelEncryption</Description>
+    <TargetExt>.gha</TargetExt>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="Grasshopper" Version="8.18.25100.11001" IncludeAssets="compile;build" />
+  </ItemGroup>
+
+</Project>

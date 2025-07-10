@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
+        "projectName": "ExcelEncryption",
+        "projectPath": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
+        "packagesPath": "C:\\Users\\fateme\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\fateme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
+            "Grasshopper": {
+              "include": "Compile, Build",
+              "target": "Package",
+              "version": "[8.18.25100.11001, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
