@@ -1,152 +1,165 @@
-using Grasshopper;
 using Grasshopper.Kernel;
-using Rhino.Geometry;
 using System;
-using System.Collections.Generic;
+using System.IO; // Required for file operations
+using System.Security.Cryptography; // Required for encryption
+
+// TODO: If ClosedXML is used for specific Excel manipulation before encryption, add:
+// using ClosedXML.Excel;
 
 namespace ExcelEncryption
 {
-    public class ExcelEncryptionComponent : GH_Component
+    public class ExcelFileEncryptorComponent : GH_Component
     {
-        /// <summary>
-        /// Each implementation of GH_Component must provide a public 
-        /// constructor without any arguments.
-        /// Category represents the Tab in which the component will appear, 
-        /// Subcategory the panel. If you use non-existing tab or panel names, 
-        /// new tabs/panels will automatically be created.
-        /// </summary>
-        public ExcelEncryptionComponent()
-          : base("ExcelEncryption", "ExcelEncryption",
-            "Construct an Archimedean, or arithmetic, spiral given its radii and number of turns.",
-            "Encryption", "Excel")
+        public ExcelFileEncryptorComponent()
+          : base("Excel File Encryptor", "ExcelEncrypt",
+                "Encrypts an Excel file using AES encryption.",
+                "Utilities", "Encryption") // Matched category/subcategory of old component
         {
         }
 
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
+        public override Guid ComponentGuid => new Guid("A1B2C3D4-E5F6-7890-1234-567890ABCDEF"); // New GUID
+
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            // Use the pManager object to register your input parameters.
-            // You can often supply default values when creating parameters.
-            // All parameters must have the correct access type. If you want 
-            // to import lists or trees of values, modify the ParamAccess flag.
-            pManager.AddPlaneParameter("Plane", "P", "Base plane for spiral", GH_ParamAccess.item, Plane.WorldXY);
-            pManager.AddNumberParameter("Inner Radius", "R0", "Inner radius for spiral", GH_ParamAccess.item, 1.0);
-            pManager.AddNumberParameter("Outer Radius", "R1", "Outer radius for spiral", GH_ParamAccess.item, 10.0);
-            pManager.AddIntegerParameter("Turns", "T", "Number of turns between radii", GH_ParamAccess.item, 10);
-
-            // If you want to change properties of certain parameters, 
-            // you can use the pManager instance to access them by index:
-            //pManager[0].Optional = true;
+            pManager.AddTextParameter("Input Excel File Path", "I", "The path of the Excel file to encrypt", GH_ParamAccess.item);
+            pManager.AddTextParameter("Output Encrypted File Path", "O", "The path where the encrypted file will be saved", GH_ParamAccess.item);
+            // Future enhancement: Add a parameter to trigger a Windows Form for file selection or options
+            // pManager.AddBooleanParameter("Show Options", "Opt", "Show encryption options form", GH_ParamAccess.item, false);
         }
 
-        /// <summary>
-        /// Registers all the output parameters for this component.
-        /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            // Use the pManager object to register your output parameters.
-            // Output parameters do not have default values, but they too must have the correct access type.
-            pManager.AddCurveParameter("Spiral", "S", "Spiral curve", GH_ParamAccess.item);
-
-            // Sometimes you want to hide a specific parameter from the Rhino preview.
-            // You can use the HideParameter() method as a quick way:
-            //pManager.HideParameter(0);
+            pManager.AddBooleanParameter("Success", "S", "True if the file was successfully encrypted.", GH_ParamAccess.item);
         }
 
-        /// <summary>
-        /// This is the method that actually does the work.
-        /// </summary>
-        /// <param name="DA">The DA object can be used to retrieve data from input parameters and 
-        /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // First, we need to retrieve all data from the input parameters.
-            // We'll start by declaring variables and assigning them starting values.
-            Plane plane = Plane.WorldXY;
-            double radius0 = 0.0;
-            double radius1 = 0.0;
-            int turns = 0;
+            string inputFilePath = string.Empty;
+            string outputFilePath = string.Empty;
+            bool success = false;
 
-            // Then we need to access the input parameters individually. 
-            // When data cannot be extracted from a parameter, we should abort this method.
-            if (!DA.GetData(0, ref plane)) return;
-            if (!DA.GetData(1, ref radius0)) return;
-            if (!DA.GetData(2, ref radius1)) return;
-            if (!DA.GetData(3, ref turns)) return;
+            if (!DA.GetData(0, ref inputFilePath)) return;
+            if (!DA.GetData(1, ref outputFilePath)) return;
 
-            // We should now validate the data and warn the user if invalid data is supplied.
-            if (radius0 < 0.0)
+            // Validate input path
+            if (string.IsNullOrEmpty(inputFilePath) || !File.Exists(inputFilePath))
             {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Inner radius must be bigger than or equal to zero");
-                return;
-            }
-            if (radius1 <= radius0)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Outer radius must be bigger than the inner radius");
-                return;
-            }
-            if (turns <= 0)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Spiral turn count must be bigger than or equal to one");
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Input file path is invalid or file does not exist.");
+                DA.SetData(0, false);
                 return;
             }
 
-            // We're set to create the spiral now. To keep the size of the SolveInstance() method small, 
-            // The actual functionality will be in a different method:
-            Curve spiral = CreateSpiral(plane, radius0, radius1, turns);
+            // Validate output path
+            if (string.IsNullOrEmpty(outputFilePath))
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Output file path is invalid.");
+                DA.SetData(0, false);
+                return;
+            }
 
-            // Finally assign the spiral to the output parameter.
-            DA.SetData(0, spiral);
+            // It's good practice to ensure the output directory exists.
+            try
+            {
+                string outputDirectory = Path.GetDirectoryName(outputFilePath);
+                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory))
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
+            }
+            catch (Exception ex)
+            {
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, $"Error creating output directory: {ex.Message}");
+                DA.SetData(0, false);
+                return;
+            }
+
+            // Placeholder for Windows Form interaction if needed:
+            // bool showOptions = false;
+            // DA.GetData("Show Options", ref showOptions); // Assuming "Show Options" is the 3rd input if enabled
+            // if (showOptions)
+            // {
+            //     // Launch form here, potentially modifying inputFilePath or outputFilePath
+            //     // For example:
+            //     // var form = new EncryptionOptionsForm(inputFilePath, outputFilePath);
+            //     // if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //     // {
+            //     //     inputFilePath = form.SelectedInputPath;
+            //     //     outputFilePath = form.SelectedOutputPath;
+            //     // }
+            //     // else return; // User cancelled
+            // }
+
+            try
+            {
+                EncryptFile(inputFilePath, outputFilePath);
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, $"Encryption failed: {ex.Message}");
+            }
+
+            DA.SetData(0, success);
         }
 
-        Curve CreateSpiral(Plane plane, double r0, double r1, Int32 turns)
+    // --- Start of Encryption Logic (copied from Encryption_old) ---
+
+    // IMPORTANT: These Key and IV are hardcoded and should be identical to the ones
+    // in your DecryptionComponent if you want to decrypt these files.
+    // For production systems, consider more secure ways to manage keys.
+    private static readonly byte[] Key = Convert.FromBase64String("GZuHOfU1C5F6SgI+PRKo+g=="); // 16 bytes for AES-128. Ensure this matches DecryptionComponent.
+    private static readonly byte[] IV = Convert.FromBase64String("0v2u51jxM1dwalKzbWiZHg=="); // 16 bytes for AES. Ensure this matches DecryptionComponent.
+
+    private void EncryptFile(string inputFile, string outputFile)
+    {
+        // The old project used Aes.Create() which defaults to AES-256 if key is 32 bytes,
+        // but the key here is 16 bytes, implying AES-128.
+        // Let's be explicit with AesCryptoServiceProvider for clarity if needed,
+        // or ensure Aes.Create() is configured correctly if issues arise.
+        // For now, direct copy of Aes.Create() is fine as it should work.
+        using (Aes aes = Aes.Create())
         {
-            Line l0 = new Line(plane.Origin + r0 * plane.XAxis, plane.Origin + r1 * plane.XAxis);
-            Line l1 = new Line(plane.Origin - r0 * plane.XAxis, plane.Origin - r1 * plane.XAxis);
+            aes.Key = Key;
+            aes.IV = IV;
 
-            Point3d[] p0;
-            Point3d[] p1;
-
-            l0.ToNurbsCurve().DivideByCount(turns, true, out p0);
-            l1.ToNurbsCurve().DivideByCount(turns, true, out p1);
-
-            PolyCurve spiral = new PolyCurve();
-
-            for (int i = 0; i < p0.Length - 1; i++)
+            using (FileStream fsInput = new FileStream(inputFile, FileMode.Open, FileAccess.Read))
+            using (FileStream fsEncrypted = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
+            using (ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+            using (CryptoStream csEncrypt = new CryptoStream(fsEncrypted, encryptor, CryptoStreamMode.Write))
             {
-                Arc arc0 = new Arc(p0[i], plane.YAxis, p1[i + 1]);
-                Arc arc1 = new Arc(p1[i + 1], -plane.YAxis, p0[i + 1]);
-
-                spiral.Append(arc0);
-                spiral.Append(arc1);
+                fsInput.CopyTo(csEncrypt);
             }
-
-            return spiral;
         }
+    }
 
-        /// <summary>
-        /// The Exposure property controls where in the panel a component icon 
-        /// will appear. There are seven possible locations (primary to septenary), 
-        /// each of which can be combined with the GH_Exposure.obscure flag, which 
-        /// ensures the component will only be visible on panel dropdowns.
-        /// </summary>
+    // Optional: If you need to generate new keys/IVs (e.g., for a key management system)
+    // You can include these helper methods. For this task, we use the hardcoded ones.
+    /*
+    private static byte[] GenerateRandomKey()
+    {
+        using (var rng = new RNGCryptoServiceProvider())
+        {
+            byte[] key = new byte[16]; // 128-bit key (or 32 for AES-256)
+            rng.GetBytes(key);
+            return key;
+        }
+    }
+
+    private static byte[] GenerateRandomIV()
+    {
+        using (var rng = new RNGCryptoServiceProvider())
+        {
+            byte[] iv = new byte[16]; // 128-bit IV
+            rng.GetBytes(iv);
+            return iv;
+        }
+    }
+    */
+    // --- End of Encryption Logic ---
+
         public override GH_Exposure Exposure => GH_Exposure.primary;
 
-        /// <summary>
-        /// Provides an Icon for every component that will be visible in the User Interface.
-        /// Icons need to be 24x24 pixels.
-        /// You can add image files to your project resources and access them like this:
-        /// return Resources.IconForThisComponent;
-        /// </summary>
-        protected override System.Drawing.Bitmap Icon => null;
-
-        /// <summary>
-        /// Each component must have a unique Guid to identify it. 
-        /// It is vital this Guid doesn't change otherwise old ghx files 
-        /// that use the old ID will partially fail during loading.
-        /// </summary>
-        public override Guid ComponentGuid => new Guid("19019918-1ec7-4f16-9c9e-140c30f062c1");
+        protected override System.Drawing.Bitmap Icon => null; // Or add a custom icon
     }
 }
