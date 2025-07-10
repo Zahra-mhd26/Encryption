@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\",
+  "WorkspaceRootPath": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|c:\\users\\fateme\\desktop\\increptioncode\\excelencryption_c#\\excelencryptioncomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|c:\\users\\fateme\\desktop\\encryptionproject\\excelencryption_c#\\excelencryptioncomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|solutionrelative:excelencryptioncomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\excelencryption.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|solutionrelative:excelencryption.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\excelencryption.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|solutionrelative:excelencryption.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|c:\\users\\fateme\\desktop\\encryptionproject\\excelencryption_c#\\exceldecryptioncomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8EA6B13-E24D-43B6-B33C-95003861BB28}|ExcelEncryption.csproj|solutionrelative:exceldecryptioncomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,38 +26,49 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ExcelEncryption.csproj",
-              "DocumentMoniker": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
-              "RelativeDocumentMoniker": "ExcelEncryption.csproj",
-              "ToolTip": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
-              "RelativeToolTip": "ExcelEncryption.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-10T06:39:28.371Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ExcelEncryption",
-              "DocumentMoniker": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
-              "RelativeDocumentMoniker": "ExcelEncryption.csproj",
-              "ToolTip": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
-              "RelativeToolTip": "ExcelEncryption.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-10T06:37:11.758Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ExcelEncryptionComponent.cs",
-              "DocumentMoniker": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryptionComponent.cs",
+              "DocumentMoniker": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelEncryptionComponent.cs",
               "RelativeDocumentMoniker": "ExcelEncryptionComponent.cs",
-              "ToolTip": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryptionComponent.cs",
+              "ToolTip": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelEncryptionComponent.cs",
               "RelativeToolTip": "ExcelEncryptionComponent.cs",
-              "ViewState": "AQIAAJUAAABkKYWXaxI3wJcAAAABAAAA",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAYwG0AAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-10T06:32:09.767Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "ca5a3cad-3b9c-4fe0-8aee-fc9b5134f39f",
+        "Display": 0,
+        "X": -5,
+        "Y": 134,
+        "Width": 1568,
+        "Height": 690,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExcelDecryptionComponent.cs",
+              "DocumentMoniker": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelDecryptionComponent.cs",
+              "RelativeDocumentMoniker": "ExcelDecryptionComponent.cs",
+              "ToolTip": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelDecryptionComponent.cs",
+              "RelativeToolTip": "ExcelDecryptionComponent.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAYwBMAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-10T07:30:28.273Z",
               "EditorCaption": ""
             }
           ]
