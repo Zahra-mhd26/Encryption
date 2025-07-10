@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Description of ExcelEncryption")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+77d6e12ab5184fd5d205fea20e97523dc7cb83d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+1f1f1bf5746c34a85f62071c1eb5da0771f3166c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExcelEncryption")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExcelEncryption")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

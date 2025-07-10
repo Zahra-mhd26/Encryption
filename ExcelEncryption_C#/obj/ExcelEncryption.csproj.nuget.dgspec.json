@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj": {}
+    "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelEncryption.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj": {
+    "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelEncryption.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
+        "projectUniqueName": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelEncryption.csproj",
         "projectName": "ExcelEncryption",
-        "projectPath": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\ExcelEncryption.csproj",
+        "projectPath": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\ExcelEncryption.csproj",
         "packagesPath": "C:\\Users\\fateme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fateme\\Desktop\\IncreptionCode\\ExcelEncryption_C#\\obj\\",
+        "outputPath": "C:\\Users\\fateme\\Desktop\\EncryptionProject\\ExcelEncryption_C#\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\fateme\\AppData\\Roaming\\NuGet\\NuGet.Config",
