@@ -103,6 +103,7 @@ namespace ExcelEncryption
             DA.SetData(0, success);
         }
 
+
     // --- Start of Encryption Logic (copied from Encryption_old) ---
 
     // IMPORTANT: These Key and IV are hardcoded and should be identical to the ones
